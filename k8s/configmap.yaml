@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: agent-ai-config
+  namespace: agent-ai
+  labels:
+    app: agent-ai
+data:
+  llm_provider: "openai"
+  api_port: "8000"
+  log_format: "json"
+  enable_metrics: "true"
+  enable_tracing: "true"
+  tracing_provider: "jaeger"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: agent-ai-secrets
+  namespace: agent-ai
+  labels:
+    app: agent-ai
+type: Opaque
+stringData:
+  llm_api_key: "sk-placeholder-change-in-production"
+  database_url: "postgresql://user:password@postgres-service:5432/agent_ai"
+  webhook_secret: "webhook-secret-placeholder-change-in-production"
+  redis_password: "redis-password-placeholder-change-in-production"
+  jwt_secret: "jwt-secret-placeholder-change-in-production"
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: agent-ai-logging
+  namespace: agent-ai
+data:
+  logging.yaml: |
+    version: 1
+    disable_existing_loggers: false
+    formatters:
+      json:
+        class: pythonjsonlogger.jsonlogger.JsonFormatter
+        format: '%(timestamp)s %(level)s %(name)s %(message)s'
+      standard:
+        format: '[%(asctime)s] %(levelname)s - %(name)s - %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        level: INFO
+        formatter: json
+        stream: ext://sys.stdout
+      file:
+        class: logging.handlers.RotatingFileHandler
+        level: DEBUG
+        formatter: json
+        filename: /app/logs/agent_ai.log
+        maxBytes: 10485760
+        backupCount: 5
+    root:
+      level: INFO
+      handlers:
+        - console
+        - file
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: agent-ai
+  labels:
+    name: agent-ai
