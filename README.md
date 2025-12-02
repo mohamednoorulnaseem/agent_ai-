@@ -138,13 +138,13 @@ docker compose up --build
 
 Comprehensive guides for all aspects of the project:
 
-| Document | Purpose |
-|----------|---------|
-| **[API Reference](docs/API.md)** | Complete REST API documentation with examples |
-| **[Docker Setup](docs/README.docker.md)** | Docker and Docker Compose instructions |
-| **[Deployment Guide](docs/DEPLOYMENT.md)** | Production deployment and configuration |
-| **[Contributing Guide](docs/CONTRIBUTING.md)** | How to contribute to the project |
-| **[LICENSE](docs/LICENSE)** | MIT License |
+| Document                                       | Purpose                                       |
+| ---------------------------------------------- | --------------------------------------------- |
+| **[API Reference](docs/API.md)**               | Complete REST API documentation with examples |
+| **[Docker Setup](docs/README.docker.md)**      | Docker and Docker Compose instructions        |
+| **[Deployment Guide](docs/DEPLOYMENT.md)**     | Production deployment and configuration       |
+| **[Contributing Guide](docs/CONTRIBUTING.md)** | How to contribute to the project              |
+| **[LICENSE](docs/LICENSE)**                    | MIT License                                   |
 
 ## ⚙️ Configuration
 
@@ -226,6 +226,7 @@ Contributions welcome! See **[Contributing Guide](docs/CONTRIBUTING.md)** for:
 - Bug reporting
 
 Quick start:
+
 ```bash
 make install-dev        # Install dev dependencies
 make format && make check  # Format and check code

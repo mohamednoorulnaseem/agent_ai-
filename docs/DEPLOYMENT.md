@@ -79,6 +79,7 @@ CACHE_TTL=3600
 ```
 
 **⚠️ Important Security Notes:**
+
 - Never commit `.env` to version control
 - Use strong, random values for secrets
 - Rotate `JWT_SECRET_KEY` regularly
@@ -93,6 +94,7 @@ CACHE_TTL=3600
 #### Install PostgreSQL
 
 **Ubuntu:**
+
 ```bash
 sudo apt-get update
 sudo apt-get install postgresql postgresql-contrib
@@ -103,6 +105,7 @@ sudo systemctl enable postgresql
 ```
 
 **macOS:**
+
 ```bash
 brew install postgresql
 brew services start postgresql
@@ -128,6 +131,7 @@ GRANT ALL PRIVILEGES ON DATABASE agent_prod TO agent_user;
 ```
 
 Update `.env`:
+
 ```env
 DB_CONNECTION_STRING=postgresql://agent_user:your_secure_password@localhost:5432/agent_prod
 ```
@@ -148,6 +152,7 @@ DB_PATH=/var/lib/agent/agent.db
 ```
 
 Ensure the directory exists:
+
 ```bash
 sudo mkdir -p /var/lib/agent
 sudo chown app-user:app-user /var/lib/agent
@@ -321,7 +326,7 @@ http {
 
         location / {
             limit_req zone=api_limit burst=20 nodelay;
-            
+
             proxy_pass http://agent_api;
             proxy_set_header Host $host;
             proxy_set_header X-Real-IP $remote_addr;
@@ -386,11 +391,13 @@ echo "Backup completed: $DATE"
 ### 1. Application Logging
 
 Logs are written to:
+
 ```
 /var/log/agent/agent.log
 ```
 
 Monitor in real-time:
+
 ```bash
 tail -f /var/log/agent/agent.log
 ```
@@ -553,6 +560,7 @@ UPDATE tasks SET status = 'failed' WHERE id = 'task_id';
 ## Support
 
 For deployment issues:
+
 - Check [troubleshooting](#troubleshooting) section
 - Review logs: `docker logs -f agent-ai-prod`
 - Open an issue on [GitHub](https://github.com/mohamednoorulnaseem/agent_ai-)

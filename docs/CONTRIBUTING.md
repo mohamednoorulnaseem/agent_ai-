@@ -99,6 +99,7 @@ git commit -m "WIP"
 ```
 
 **Commit message format:**
+
 ```
 <type>(<scope>): <subject>
 
@@ -108,6 +109,7 @@ git commit -m "WIP"
 ```
 
 **Types:**
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `refactor`: Code refactoring
@@ -137,21 +139,21 @@ Example:
 def process_task(task_id: str, config: dict) -> dict:
     """
     Process a task and return results.
-    
+
     Args:
         task_id: Unique task identifier
         config: Configuration dictionary
-        
+
     Returns:
         Dictionary containing task results
-        
+
     Raises:
         ValueError: If task_id is empty
         RuntimeError: If processing fails
     """
     if not task_id:
         raise ValueError("task_id cannot be empty")
-    
+
     # Implementation here
     return {"status": "success", "task_id": task_id}
 ```
@@ -166,13 +168,13 @@ from src.your_module import your_function
 
 class TestYourFeature:
     """Tests for your feature."""
-    
+
     def test_basic_functionality(self):
         """Test basic functionality."""
         result = your_function("input")
         assert result is not None
         assert result["status"] == "success"
-    
+
     def test_error_handling(self):
         """Test error handling."""
         with pytest.raises(ValueError):
@@ -203,23 +205,29 @@ make test-coverage
 
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Related Issue
+
 Closes #(issue number)
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Breaking change
 - [ ] Documentation update
 
 ## Testing
+
 Describe how you tested this:
+
 - Test A: ...
 - Test B: ...
 
 ## Checklist
+
 - [ ] Code follows style guidelines
 - [ ] All tests pass
 - [ ] New tests added for new features
@@ -244,11 +252,13 @@ Example:
 ## Bug: Agent fails to parse repository with symlinks
 
 **Environment:**
+
 - OS: Windows 10
 - Python: 3.11
 - Version: 0.2.0
 
 **Steps to reproduce:**
+
 1. Create a repository with symlinked directories
 2. Run `python -m src.cli --scan`
 3. Error occurs in scanner.py line 45
@@ -258,8 +268,11 @@ Example:
 
 **Error message:**
 ```
+
 ValueError: Cannot resolve symlink path
+
 ```
+
 ```
 
 ## 📚 Documentation
