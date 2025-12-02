@@ -34,5 +34,9 @@ Thumbs.db
 .env
 config.yaml
 
+# Local runtime database and data directory
+agent.db
+data/
+
 # Ignore installed package metadata
 agent_ai.egg-info/
