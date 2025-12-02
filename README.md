@@ -1,124 +1,160 @@
-# AI Agent Framework
+# AI Agent Framework 🤖
 
 An intelligent agent framework for automated development tasks powered by LLMs.
+
+## 📁 Project Structure
+
+```
+agent_ai-/
+├── README.md                 # This file (main documentation)
+├── Dockerfile               # Docker configuration
+├── docker-compose.yml       # Docker Compose setup
+├── requirements.txt         # Python dependencies
+├── setup.py                 # Package setup
+├── agent.config.yaml        # Agent configuration template
+│
+├── src/                     # Source code
+│   ├── __init__.py
+│   ├── api.py              # REST API endpoints
+│   ├── cli.py              # Command-line interface
+│   ├── config.py           # Configuration loader
+│   ├── analytics.py        # Performance analytics
+│   ├── auth.py             # Authentication & JWT
+│   ├── persistence.py      # Database layer (SQLite)
+│   ├── templates.py        # Workflow templates
+│   ├── examples.py         # Usage examples
+│   ├── tests.py            # Unit and integration tests
+│   ├── websocket_support.py # Real-time WebSocket updates
+│   │
+│   ├── agent/              # Core agent framework
+│   │   ├── planner.py      # Task planning (LLM-driven)
+│   │   ├── executor.py     # Task execution
+│   │   └── history.py      # Conversation tracking
+│   │
+│   ├── llm/                # LLM provider integrations
+│   │   ├── base.py         # Base LLM interface
+│   │   ├── ollama.py       # Ollama (local)
+│   │   ├── openai_like.py  # OpenAI-compatible APIs
+│   │   └── mock.py         # Mock LLM for testing
+│   │
+│   └── repo/               # Repository tools
+│       ├── scanner.py      # Codebase analysis
+│       └── patcher.py      # Safe code patching
+│
+├── docs/                   # Documentation
+│   ├── README.md           # Main docs (moved here)
+│   ├── README.docker.md    # Docker setup guide
+│   └── LICENSE             # MIT License
+│
+├── scripts/                # Utility scripts (for future use)
+│
+└── .github/                # GitHub workflows (CI/CD)
+    └── workflows/
+        └── ci.yml
+```
 
 ## ✨ Features
 
 ### Phase 1: Core Framework
 
 - **Smart Planning**: Break down complex goals into actionable tasks using LLM
-- **Code Execution**: Execute tasks with access to repository scanning and code patching
+- **Code Execution**: Execute tasks with repository access and code patching
 - **Conversation History**: Track and manage multi-turn conversations
-- **Repository Tools**: Scan codebases and apply targeted code changes
+- **Repository Tools**: Scan codebases and apply targeted changes safely
 - **Multiple LLM Support**: Works with Ollama, OpenAI, and OpenAI-like APIs
-- **Interactive CLI**: Command-line interface for easy interaction
+- **Interactive CLI**: Easy command-line interface
 
 ### Phase 2: Production Ready
 
-- **REST API**: 10 endpoints for plan management and execution
+- **REST API**: 10+ endpoints for plan management and execution
 - **Database Persistence**: SQLite backend for data survival
 - **Web Integration**: FastAPI server for remote access
 
-### Phase 3: Enterprise Features (NEW! 🚀)
+### Phase 3: Enterprise Features 🚀
 
 - **Real-time Updates**: WebSocket support for live task monitoring
 - **Authentication**: JWT tokens + API key management
-- **Task Templates**: 8 predefined workflow templates
+- **Task Templates**: 8+ predefined workflow templates
 - **Performance Analytics**: Track execution metrics and trending tasks
 - **24 REST Endpoints**: Comprehensive API coverage
 
-## Installation
+## 🚀 Quick Start
 
-1. Clone the repository
-2. Install dependencies:
-
-   ```bash
-   pip install pyyaml requests openai
-   ```
-
-3. Create a configuration file `agent.config.yaml`:
-   ```yaml
-   llm:
-     provider: "ollama" # or "openai_like"
-     model: "llama2"
-     api_base: "http://localhost:11434"
-     temperature: 0.0
-     top_p: 1.0
-   ```
-
-## Usage
-
-### Command Line
+### 1. Installation
 
 ```bash
-# Plan a goal
-python -m agent_ai.cli --goal "Create a REST API for user management"
+# Clone the repository
+git clone https://github.com/mohamednoorulnaseem/agent_ai-.git
+cd agent_ai-
 
-# Scan repository
-python -m agent_ai.cli --scan
+# Install dependencies
+pip install -r requirements.txt
 
-# Execute a task
-python -m agent_ai.cli --execute 1
-
-# Interactive mode
-python -m agent_ai.cli --interactive
-
-# With custom config and repository
-python -m agent_ai.cli --goal "Fix linting errors" --repo /path/to/repo --config custom.yaml
+# (Optional) For development
+pip install -e .
 ```
 
-### Programmatic Usage
+### 2. Configure LLM
 
-```python
-from agent_ai import load_config_and_llm, Planner, Executor
-
-# Load configuration and LLM
-config, llm = load_config_and_llm("agent.config.yaml")
-
-# Create planner and executor
-planner = Planner(llm)
-executor = Executor(llm, "/path/to/repo")
-
-# Plan a goal
-tasks = planner.plan("Implement user authentication")
-
-# Execute tasks
-for task in tasks:
-    result = executor.execute_task(task)
-    planner.mark_task_complete(task.id, result)
-    print(result)
-
-# View summary
-print(planner.get_plan_summary())
-```
-
-## Architecture
-
-### Components
-
-- **Planner** (`agent/planner.py`): Breaks goals into tasks
-- **Executor** (`agent/executor.py`): Executes tasks and manages results
-- **History** (`agent/history.py`): Tracks conversation messages
-- **Scanner** (`repo/scanner.py`): Analyzes repository structure
-- **Patcher** (`repo/patcher.py`): Applies code changes safely
-- **LLM Providers** (`llm/`): Supports multiple LLM backends
-
-### Configuration
-
-Configuration is loaded from `agent.config.yaml`:
+Create `agent.config.yaml`:
 
 ```yaml
 llm:
-  provider: "ollama" # LLM provider
-  model: "llama2" # Model name
-  api_base: "http://localhost:11434" # API endpoint
-  temperature: 0.0 # Creativity (0=deterministic, 1=creative)
-  top_p: 1.0 # Nucleus sampling
+  provider: "ollama" # or "openai_like"
+  model: "llama2"
+  api_base: "http://localhost:11434"
+  temperature: 0.0
+  top_p: 1.0
+```
+
+### 3. Run via CLI
+
+```bash
+# Plan a goal
+python -m src.cli --goal "Create a REST API for user management"
+
+# Interactive mode
+python -m src.cli --interactive
+```
+
+### 4. Run via REST API
+
+```bash
+# Start the server
+python -m src.api
+
+# API will be available at http://localhost:8000
+# Swagger UI: http://localhost:8000/docs
+```
+
+### 5. Run with Docker (Recommended)
+
+```bash
+docker compose up --build
+# Access at http://localhost:8000
+```
+
+## 📖 Documentation
+
+- **[Main Docs](docs/README.md)** — Detailed usage, architecture, examples
+- **[Docker Setup](docs/README.docker.md)** — Docker and Compose instructions
+- **[License](docs/LICENSE)** — MIT License
+
+## ⚙️ Configuration
+
+All settings are in `agent.config.yaml`:
+
+```yaml
+llm:
+  provider: "ollama"
+  model: "llama2"
+  api_base: "http://localhost:11434"
+  temperature: 0.0
 
 agent:
-  max_tasks: 50 # Maximum tasks per plan
-  max_history: 100 # Maximum conversation messages
-  task_timeout: 300 # Task timeout in seconds
+  max_tasks: 50
+  max_history: 100
+  task_timeout: 300
 
 repository:
   ignore_dirs: [".git", "__pycache__", "node_modules"]
@@ -129,108 +165,59 @@ logging:
   console: true
 ```
 
-## Supported LLMs
+## 🔌 Supported LLMs
 
-### Ollama (Local)
+| Provider             | Config                  | Notes                          |
+| -------------------- | ----------------------- | ------------------------------ |
+| **Ollama**           | `provider: ollama`      | Local, no API key needed       |
+| **OpenAI**           | `provider: openai_like` | API key required               |
+| **Other compatible** | `provider: openai_like` | Any OpenAI-compatible endpoint |
 
-```yaml
-llm:
-  provider: "ollama"
-  model: "llama2"
-  api_base: "http://localhost:11434"
-```
-
-### OpenAI
-
-```yaml
-llm:
-  provider: "openai_like"
-  model: "gpt-4"
-  api_base: "https://api.openai.com/v1"
-  api_key: "your-api-key"
-```
-
-### Other OpenAI-compatible APIs
-
-```yaml
-llm:
-  provider: "openai_like"
-  model: "your-model"
-  api_base: "https://your-api-endpoint"
-  api_key: "your-api-key"
-```
-
-## Workflow
-
-1. **Plan**: Define a high-level goal
-2. **Break Down**: Agent plans the goal into tasks
-3. **Scan**: Agent scans the repository
-4. **Execute**: Agent executes each task using the LLM
-5. **Apply**: Changes are applied safely with backups
-6. **Track**: Conversation history is maintained
-
-## Examples
-
-### Example 1: Create a REST API
+## 🧪 Testing
 
 ```bash
-python -m agent_ai.cli --goal "Create a FastAPI REST API for managing todos with CRUD operations"
+# Run all tests
+python -m pytest src/tests.py -v
+
+# Run specific test
+python -m pytest src/tests.py::TestPlanner -v
 ```
 
-### Example 2: Fix Code Issues
+## 🐳 Docker Commands
 
 ```bash
-python -m agent_ai.cli --goal "Find all Python files with unused imports and remove them"
+# Build and run
+docker compose up --build -d
+
+# View logs
+docker compose logs -f
+
+# Stop containers
+docker compose down
+
+# Clean up
+docker image prune -f && docker volume prune -f
 ```
 
-### Example 3: Add Documentation
+See [Docker guide](docs/README.docker.md) for more details.
 
-```bash
-python -m agent_ai.cli --goal "Add comprehensive docstrings to all functions in src/utils.py"
-```
+## 🤝 Contributing
 
-## Safety Features
-
-- **Backups**: Automatic backups before modifying files
-- **Validation**: Configuration validation before execution
-- **Limits**: Task and history size limits to prevent resource exhaustion
-- **Permissions**: Safe file system operations with error handling
-- **Timeouts**: Configurable task execution timeouts
-
-## Development
-
-### Adding a New LLM Provider
-
-1. Create a new class in `llm/`:
-
-   ```python
-   from agent_ai.llm.base import LLM
-
-   class YourProvider(LLM):
-       def completion(self, messages, **kwargs):
-           # Implementation here
-           pass
-   ```
-
-2. Register in `config.py`:
-   ```python
-   elif provider == "your_provider":
-       llm = YourProvider(...)
-   ```
-
-## Contributing
-
-Contributions are welcome! Please ensure:
+Contributions welcome! Please ensure:
 
 - Code follows PEP 8 style guide
-- All functions have docstrings
-- Error handling is comprehensive
+- Functions have docstrings
 - Tests are included for new features
+- All tests pass
 
-## License
+## 📄 License
 
-MIT License - See LICENSE file for details
+MIT License — See [LICENSE](docs/LICENSE) for details.
 
-## Support
+## 🆘 Support
 
-For issues, questions, or suggestions, please open an issue on GitHub.
+For issues or questions, please open an issue on [GitHub](https://github.com/mohamednoorulnaseem/agent_ai-).
+
+---
+
+**Happy automating!** 🚀

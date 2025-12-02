@@ -9,7 +9,8 @@ setup(
     version="0.2.0",
     description="An intelligent agent framework for automated development tasks",
     author="AI Agent Team",
-    packages=find_packages(where="."),
+    packages=find_packages(where="src"),
+    package_dir={"": "src"},
     py_modules=["cli", "config", "api", "persistence", "auth", "websocket_support", "templates", "analytics"],
     python_requires=">=3.8",
     install_requires=[
@@ -24,7 +25,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "agent-ai=cli:main",
+            "agent-ai=src.cli:main",
         ],
     },
     classifiers=[

@@ -1,6 +1,7 @@
 # Docker (Windows) — Quick Start
 
 Prerequisites:
+
 - Docker Desktop for Windows (enable WSL2 integration recommended)
 - Virtualization/WSL2 installed and running
 
@@ -26,11 +27,13 @@ Common commands:
 - Remove dangling images/volumes: `docker image prune -f` and `docker volume prune -f`
 
 Notes:
+
 - The project exposes port `8000` (Uvicorn run via `CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]` in `Dockerfile`).
 - On Windows, file-mounted volumes can cause permission and performance differences; if you encounter issues, try running without the source mount or use WSL2 paths.
 - A `.dockerignore` file was added to reduce build context size and speed builds.
 
 Files added in this change:
+
 - `.dockerignore` — excludes unnecessary files from Docker build context
 - `README.docker.md` — this quick-start doc
 
