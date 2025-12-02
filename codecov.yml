@@ -1,0 +1,57 @@
+# Codecov Configuration
+# See: https://docs.codecov.com/docs/configuration
+
+codecov:
+  require_ci_to_pass: false
+  after_n_builds: null
+  allow_coverage_offsets: false
+  strict_yaml_branch: null
+
+coverage:
+  precision: 2
+  round: down
+  range: "70...100"
+
+ignore:
+  - "tests"
+  - "benchmarks"
+  - "examples"
+  - "docs"
+
+flags:
+  unit:
+    carryforward: false
+  integration:
+    carryforward: false
+
+comment:
+  layout: "reach, diff, flags, files, footer"
+  behavior: default
+  require_changes: false
+  require_base: false
+  require_head: true
+  show_carryforward_flags: false
+
+github_checks:
+  annotations: true
+
+status:
+  project:
+    default:
+      target: 80%
+      threshold: 5%
+      base: auto
+    unit:
+      target: 85%
+      threshold: 5%
+  patch:
+    default:
+      target: 80%
+      threshold: 5%
+  changes:
+    default:
+      target: 80%
+      threshold: 5%
+
+suggest:
+  layout: files

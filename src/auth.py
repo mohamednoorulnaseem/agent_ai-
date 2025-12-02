@@ -5,29 +5,29 @@ Supports JWT tokens and API keys.
 
 from fastapi import Depends, HTTPException, status, Header
 from datetime import datetime, timedelta
-from typing import Optional, Dict
+from typing import Optional, Dict, Any
 import jwt
 import secrets
 
 
 # Configuration
-SECRET_KEY = secrets.token_urlsafe(32)  # In production, use environment variable
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+SECRET_KEY: str = secrets.token_urlsafe(32)  # In production, use environment variable
+ALGORITHM: str = "HS256"
+ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
 
 class TokenManager:
     """Manages JWT tokens."""
     
     @staticmethod
-    def create_access_token(data: Dict, expires_delta: Optional[timedelta] = None) -> str:
+    def create_access_token(data: Dict[str, Any], expires_delta: Optional[timedelta] = None) -> str:
         """Create a JWT access token."""
-        to_encode = data.copy()
+        to_encode: Dict[str, Any] = data.copy()
         
         if expires_delta:
-            expire = datetime.utcnow() + expires_delta
+            expire: datetime = datetime.utcnow() + expires_delta
         else:
-            expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+            expire: datetime = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
         
         to_encode.update({"exp": expire})
         
@@ -39,10 +39,10 @@ class TokenManager:
         return encoded_jwt
     
     @staticmethod
-    def verify_token(token: str) -> Dict:
+    def verify_token(token: str) -> Dict[str, Any]:
         """Verify and decode a JWT token."""
         try:
-            payload = jwt.decode(
+            payload: Dict[str, Any] = jwt.decode(
                 token,
                 SECRET_KEY,
                 algorithms=[ALGORITHM]
@@ -59,12 +59,12 @@ class APIKeyManager:
     """Manages API keys for programmatic access."""
     
     # In production, store in database
-    _api_keys: Dict[str, Dict] = {}
+    _api_keys: Dict[str, Dict[str, Any]] = {}
     
     @classmethod
     def generate_api_key(cls, name: str) -> str:
         """Generate a new API key."""
-        key = f"sk-{secrets.token_urlsafe(32)}"
+        key: str = f"sk-{secrets.token_urlsafe(32)}"
         cls._api_keys[key] = {
             "name": name,
             "created_at": datetime.utcnow().isoformat(),

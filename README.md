@@ -2,6 +2,12 @@
 
 An intelligent agent framework for automated development tasks powered by LLMs.
 
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Actions](https://github.com/mohamednoorulnaseem/agent_ai-/workflows/CI/badge.svg)](https://github.com/mohamednoorulnaseem/agent_ai-/actions)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Contributions Welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg)](docs/CONTRIBUTING.md)
+
 ## 📁 Project Structure
 
 ```
@@ -140,10 +146,13 @@ Comprehensive guides for all aspects of the project:
 
 | Document                                       | Purpose                                       |
 | ---------------------------------------------- | --------------------------------------------- |
+| **[Changelog](CHANGELOG.md)**                  | Version history and release notes             |
 | **[API Reference](docs/API.md)**               | Complete REST API documentation with examples |
 | **[Docker Setup](docs/README.docker.md)**      | Docker and Docker Compose instructions        |
 | **[Deployment Guide](docs/DEPLOYMENT.md)**     | Production deployment and configuration       |
 | **[Contributing Guide](docs/CONTRIBUTING.md)** | How to contribute to the project              |
+| **[Type Hints](docs/TYPING.md)**               | Type hints and static analysis guide          |
+| **[Security Policy](SECURITY.md)**             | Security guidelines and vulnerability reporting |
 | **[LICENSE](docs/LICENSE)**                    | MIT License                                   |
 
 ## ⚙️ Configuration
@@ -213,6 +222,27 @@ docker compose down
 ```
 
 Full Docker guide: **[Docker Setup](docs/README.docker.md)**
+
+## 📚 Examples & Workflows
+
+Learn by example with practical workflows:
+
+```bash
+# Run interactive demo
+python scripts/demo.py
+
+# Feature implementation workflow
+python -m examples.workflows.feature_implementation
+
+# Bug fix workflow
+python -m examples.workflows.bug_fix
+
+# Code refactoring workflow
+python -m examples.workflows.refactoring
+
+# Run performance benchmarks
+python -m benchmarks.agent_benchmarks
+```
 
 ## 🤝 Contributing
 

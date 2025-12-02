@@ -14,6 +14,9 @@ from config import load_config_and_llm
 from agent.planner import Planner
 from agent.executor import Executor
 from agent.history import ConversationHistory
+from typing import List, Dict, Any, Optional, Tuple
+
+
 def setup_parser() -> argparse.ArgumentParser:
     """Set up command-line argument parser."""
     parser = argparse.ArgumentParser(
@@ -86,13 +89,13 @@ Examples:
     return parser
 
 
-def cmd_plan(planner: Planner, goal: str, history: ConversationHistory) -> list:
+def cmd_plan(planner: Planner, goal: str, history: ConversationHistory) -> List[Any]:
     """Plan a goal into tasks."""
     print(f"\nPlanning goal: {goal}")
     print("-" * 50)
     
     history.add_message("user", goal)
-    tasks = planner.plan(goal)
+    tasks: List[Any] = planner.plan(goal)
     
     print(f"\nCreated {len(tasks)} tasks:\n")
     for task in tasks:
@@ -103,18 +106,18 @@ def cmd_plan(planner: Planner, goal: str, history: ConversationHistory) -> list:
     return tasks
 
 
-def cmd_execute(executor: Executor, task_id: int, planner: Planner, history: ConversationHistory):
+def cmd_execute(executor: Executor, task_id: int, planner: Planner, history: ConversationHistory) -> None:
     """Execute a specific task."""
     if task_id not in planner.tasks:
         print(f"Task {task_id} not found")
         return
     
-    task = planner.tasks[task_id]
+    task: Any = planner.tasks[task_id]
     
     print(f"\nExecuting task {task_id}: {task.description}")
     print("-" * 50)
     
-    result = executor.execute_task(task)
+    result: str = executor.execute_task(task)
     planner.mark_task_complete(task_id, result)
     
     print(result)
@@ -125,18 +128,18 @@ def cmd_execute(executor: Executor, task_id: int, planner: Planner, history: Con
     print("\n✓ Task completed")
 
 
-def cmd_scan(executor: Executor):
+def cmd_scan(executor: Executor) -> None:
     """Scan repository."""
     print("Scanning repository...")
     print("-" * 50)
     
-    info = executor.scanner.scan_repository()
+    info: str = executor.scanner.scan_repository()
     print(info)
 
 
-def cmd_history(history: ConversationHistory):
+def cmd_history(history: ConversationHistory) -> None:
     """Display conversation history."""
-    summary = history.get_summary()
+    summary: Dict[str, Any] = history.get_summary()
     print("\nConversation History:")
     print("-" * 50)
     print(f"Total Messages: {summary['total_messages']}")
@@ -149,7 +152,7 @@ def cmd_history(history: ConversationHistory):
         print(f"Content: {summary['last_message']['content'][:100]}...")
 
 
-def interactive_mode(planner: Planner, executor: Executor, history: ConversationHistory):
+def interactive_mode(planner: Planner, executor: Executor, history: ConversationHistory) -> None:
     """Run interactive mode."""
     print("\n" + "=" * 50)
     print("AI Agent - Interactive Mode")
@@ -165,7 +168,7 @@ def interactive_mode(planner: Planner, executor: Executor, history: Conversation
     
     while True:
         try:
-            user_input = input("agent> ").strip()
+            user_input: str = input("agent> ").strip()
             
             if not user_input:
                 continue
@@ -208,13 +211,15 @@ def interactive_mode(planner: Planner, executor: Executor, history: Conversation
             print(f"Error: {e}")
 
 
-def main():
+def main() -> None:
     """Main entry point."""
-    parser = setup_parser()
+    parser: argparse.ArgumentParser = setup_parser()
     args = parser.parse_args()
     
     # Load configuration
     try:
+        config: Dict[str, Any]
+        llm: Any
         config, llm = load_config_and_llm(args.config)
     except FileNotFoundError:
         print(f"Error: Configuration file '{args.config}' not found")
@@ -225,15 +230,15 @@ def main():
         sys.exit(1)
     
     # Resolve repository path
-    repo_path = os.path.abspath(args.repo)
+    repo_path: str = os.path.abspath(args.repo)
     if not os.path.isdir(repo_path):
         print(f"Error: Repository path '{repo_path}' does not exist")
         sys.exit(1)
     
     # Initialize components
-    planner = Planner(llm)
-    executor = Executor(llm, repo_path)
-    history = ConversationHistory()
+    planner: Planner = Planner(llm)
+    executor: Executor = Executor(llm, repo_path)
+    history: ConversationHistory = ConversationHistory()
     
     if args.verbose:
         print(f"Configuration: {args.config}")
