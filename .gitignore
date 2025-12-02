@@ -1,0 +1,38 @@
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+eggs/
+parts/
+sdist/
+wheels/
+
+# Pytest cache
+.pytest_cache/
+
+# Editor directories
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local configuration
+.env
+config.yaml
+
+# Ignore installed package metadata
+agent_ai.egg-info/
