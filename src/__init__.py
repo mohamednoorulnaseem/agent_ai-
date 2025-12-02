@@ -23,13 +23,13 @@ Example usage:
         print(result)
 """
 
-__version__ = "0.1.0"
 __author__ = "AI Agent Team"
 
 import sys
 import os
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+# Core configuration and agent framework
 from config import load_config_and_llm
 from agent.planner import Planner, Task
 from agent.executor import Executor
@@ -39,6 +39,39 @@ from llm.ollama import Ollama
 from llm.openai_like import OpenAILike
 from repo.scanner import Scanner
 from repo.patcher import Patcher
+
+# Phase 7 exports (webhooks, query engine, caching, performance)
+from .webhooks import (
+    EventType,
+    WebhookManager,
+    WebhookEvent,
+    WebhookDelivery,
+    EventStream,
+)
+from .query_engine import (
+    QueryFilterBuilder,
+    QueryExecutor,
+    SearchEngine,
+)
+from .caching import (
+    MemoryCache,
+    PersistentCache,
+    CacheDecorator,
+    CacheStatistics,
+)
+from .performance import (
+    PerformanceProfiler,
+    profile_operation,
+    QueryOptimizer,
+    PerformanceStatistics,
+)
+
+# Prefer package version from src/__version__.py when available
+try:
+    from .__version__ import __version__ as _pkg_version
+    __version__ = _pkg_version
+except Exception:
+    __version__ = "0.1.0"
 
 __all__ = [
     "load_config_and_llm",
@@ -51,4 +84,22 @@ __all__ = [
     "OpenAILike",
     "Scanner",
     "Patcher",
+    # Phase 7 exports
+    "EventType",
+    "WebhookManager",
+    "WebhookEvent",
+    "WebhookDelivery",
+    "EventStream",
+    "QueryFilterBuilder",
+    "QueryExecutor",
+    "SearchEngine",
+    "MemoryCache",
+    "PersistentCache",
+    "CacheDecorator",
+    "CacheStatistics",
+    "PerformanceProfiler",
+    "profile_operation",
+    "QueryOptimizer",
+    "PerformanceStatistics",
+    "__version__",
 ]
