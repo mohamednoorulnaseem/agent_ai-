@@ -136,9 +136,15 @@ docker compose up --build
 
 ## 📖 Documentation
 
-- **[Main Docs](docs/README.md)** — Detailed usage, architecture, examples
-- **[Docker Setup](docs/README.docker.md)** — Docker and Compose instructions
-- **[License](docs/LICENSE)** — MIT License
+Comprehensive guides for all aspects of the project:
+
+| Document | Purpose |
+|----------|---------|
+| **[API Reference](docs/API.md)** | Complete REST API documentation with examples |
+| **[Docker Setup](docs/README.docker.md)** | Docker and Docker Compose instructions |
+| **[Deployment Guide](docs/DEPLOYMENT.md)** | Production deployment and configuration |
+| **[Contributing Guide](docs/CONTRIBUTING.md)** | How to contribute to the project |
+| **[LICENSE](docs/LICENSE)** | MIT License |
 
 ## ⚙️ Configuration
 
@@ -173,42 +179,58 @@ logging:
 | **OpenAI**           | `provider: openai_like` | API key required               |
 | **Other compatible** | `provider: openai_like` | Any OpenAI-compatible endpoint |
 
-## 🧪 Testing
+## 🧪 Testing & Quality
 
 ```bash
-# Run all tests
-python -m pytest src/tests.py -v
+# Run tests with Makefile
+make test              # Run all tests
+make test-coverage     # Run with coverage report
+make lint              # Code quality checks
+make format            # Auto-format code
+make check             # Run all checks
 
-# Run specific test
+# Or manually with pytest
+python -m pytest src/tests.py -v
 python -m pytest src/tests.py::TestPlanner -v
 ```
 
 ## 🐳 Docker Commands
 
+Quick Docker commands for common tasks:
+
 ```bash
-# Build and run
+# Build and run with Makefile (recommended)
+make build              # Build Docker image
+make run                # Start containers
+make logs               # View live logs
+make stop               # Stop containers
+make clean-docker       # Clean up images/volumes
+
+# Or use docker compose directly
 docker compose up --build -d
-
-# View logs
 docker compose logs -f
-
-# Stop containers
 docker compose down
-
-# Clean up
-docker image prune -f && docker volume prune -f
 ```
 
-See [Docker guide](docs/README.docker.md) for more details.
+Full Docker guide: **[Docker Setup](docs/README.docker.md)**
 
 ## 🤝 Contributing
 
-Contributions welcome! Please ensure:
+Contributions welcome! See **[Contributing Guide](docs/CONTRIBUTING.md)** for:
 
-- Code follows PEP 8 style guide
-- Functions have docstrings
-- Tests are included for new features
-- All tests pass
+- Development setup
+- Code style guidelines
+- Testing requirements
+- Commit message format
+- Pull request process
+- Bug reporting
+
+Quick start:
+```bash
+make install-dev        # Install dev dependencies
+make format && make check  # Format and check code
+make test-coverage      # Run tests with coverage
+```
 
 ## 📄 License
 
