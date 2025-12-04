@@ -5,6 +5,7 @@ This file contains a complete production-ready Docker Compose setup for the Agen
 ## Quick Start
 
 ### Prerequisites
+
 - Docker 20.10+
 - Docker Compose 2.0+
 - At least 8GB RAM
@@ -67,12 +68,14 @@ curl http://localhost:8000/health
 ## Services
 
 ### Agent AI Application
+
 - **Port**: 8000 (HTTP), 9090 (Metrics)
 - **Container**: `agent-ai-app`
 - **Health Check**: `/health` endpoint
 - **Logging**: JSON format, rotated daily
 
 ### PostgreSQL Database
+
 - **Port**: 5432
 - **Container**: `agent-ai-postgres`
 - **Persistence**: `postgres-data` volume
@@ -80,6 +83,7 @@ curl http://localhost:8000/health
 - **Init Script**: `docker/postgres/init.sql`
 
 ### Redis Cache
+
 - **Port**: 6379
 - **Container**: `agent-ai-redis`
 - **Auth**: Password-protected
@@ -88,6 +92,7 @@ curl http://localhost:8000/health
 - **Max Memory**: Configurable via `REDIS_MAX_MEMORY`
 
 ### Prometheus Monitoring
+
 - **Port**: 9091 (mapped from 9090)
 - **Container**: `agent-ai-prometheus`
 - **Config**: `docker/prometheus/prometheus.yml`
@@ -95,6 +100,7 @@ curl http://localhost:8000/health
 - **Retention**: 30 days (default)
 
 ### Grafana Dashboards
+
 - **Port**: 3000
 - **Container**: `agent-ai-grafana`
 - **Default Admin**: admin / (password from .env)
@@ -102,12 +108,14 @@ curl http://localhost:8000/health
 - **Dashboards**: Auto-provisioned from config
 
 ### Jaeger Tracing
+
 - **Port**: 16686 (UI)
 - **Container**: `agent-ai-jaeger`
 - **Collector**: Port 14268
 - **UI**: http://localhost:16686
 
 ### NGINX Reverse Proxy
+
 - **Port**: 80, 443
 - **Container**: `agent-ai-nginx`
 - **Config**: `docker/nginx/nginx.conf`
@@ -116,20 +124,21 @@ curl http://localhost:8000/health
 ## Networking
 
 All services communicate via `agent-ai-network` bridge network:
+
 - Isolated from host network
 - Internal DNS resolution
 - Service discovery by container name
 
 ## Volumes
 
-| Volume | Purpose | Mount Point |
-|--------|---------|-------------|
-| `postgres-data` | Database files | `/var/lib/postgresql/data` |
-| `redis-data` | Redis persistence | `/data` |
-| `agent-ai-cache` | Application cache | `/app/cache` |
-| `agent-ai-logs` | Application logs | `/app/logs` |
-| `prometheus-data` | Metrics storage | `/prometheus` |
-| `grafana-data` | Grafana config | `/var/lib/grafana` |
+| Volume            | Purpose           | Mount Point                |
+| ----------------- | ----------------- | -------------------------- |
+| `postgres-data`   | Database files    | `/var/lib/postgresql/data` |
+| `redis-data`      | Redis persistence | `/data`                    |
+| `agent-ai-cache`  | Application cache | `/app/cache`               |
+| `agent-ai-logs`   | Application logs  | `/app/logs`                |
+| `prometheus-data` | Metrics storage   | `/prometheus`              |
+| `grafana-data`    | Grafana config    | `/var/lib/grafana`         |
 
 ## Resource Limits
 
@@ -148,6 +157,7 @@ nginx:         0.25 CPU, 128MB RAM (reserved: 0.1 CPU, 64MB)
 ## Logging
 
 All services use JSON file logging driver:
+
 - Max file size: 10MB
 - Max files: 3
 - Automatic rotation
@@ -155,6 +165,7 @@ All services use JSON file logging driver:
 ## Health Checks
 
 Each service includes health checks:
+
 - Agent AI: HTTP `/health` endpoint
 - PostgreSQL: `pg_isready` command
 - Redis: INCR ping command
@@ -208,12 +219,15 @@ docker run --rm -v agent-ai-postgres:/data \
 ## Monitoring
 
 ### Prometheus Targets
+
 http://localhost:9091/targets
 
 ### Grafana Dashboards
+
 http://localhost:3000
 
 ### Jaeger Traces
+
 http://localhost:16686
 
 ## Updating
@@ -290,16 +304,19 @@ docker-compose -f docker-compose.prod.yml restart redis
 ## Performance Tuning
 
 ### PostgreSQL
+
 - Connection pooling with PgBouncer (optional)
 - Index optimization
 - Vacuum settings
 
 ### Redis
+
 - Maxmemory policy: `allkeys-lru` (LRU eviction)
 - AOF fsync: `everysec` (balance)
 - Key expiration monitoring
 
 ### Application
+
 - Horizontal scaling behind load balancer
 - Connection pooling
 - Caching strategy
@@ -307,17 +324,20 @@ docker-compose -f docker-compose.prod.yml restart redis
 ## Security
 
 ### Network Security
+
 - Internal network isolation
 - No direct public access (proxy via NGINX)
 - Firewall rules for external access
 
 ### Data Security
+
 - Database password protection
 - Redis password authentication
 - Volume encryption (host-level)
 - SSL/TLS termination (NGINX)
 
 ### Container Security
+
 - Non-root users
 - Dropped capabilities
 - Read-only root filesystem

@@ -5,6 +5,7 @@ This guide covers advanced API features including webhooks, real-time streaming,
 ## Overview
 
 The AI Agent Framework includes advanced API capabilities:
+
 - **Webhooks**: Event-driven architecture with automatic delivery and retries
 - **Event Streaming**: Real-time updates via Server-Sent Events
 - **Advanced Filtering**: Complex queries with multiple conditions
@@ -30,6 +31,7 @@ curl -X POST http://localhost:8000/webhooks \
 ### Event Types
 
 Available events:
+
 - `plan.created` - Plan created
 - `plan.started` - Plan execution started
 - `plan.completed` - Plan completed successfully
@@ -120,20 +122,20 @@ curl -N http://localhost:8000/events/stream
 ### JavaScript Example
 
 ```javascript
-const eventSource = new EventSource('/events/stream');
+const eventSource = new EventSource("/events/stream");
 
-eventSource.addEventListener('plan.completed', (event) => {
-    const data = JSON.parse(event.data);
-    console.log('Plan completed:', data);
+eventSource.addEventListener("plan.completed", (event) => {
+  const data = JSON.parse(event.data);
+  console.log("Plan completed:", data);
 });
 
-eventSource.addEventListener('task.failed', (event) => {
-    const data = JSON.parse(event.data);
-    console.log('Task failed:', data);
+eventSource.addEventListener("task.failed", (event) => {
+  const data = JSON.parse(event.data);
+  console.log("Task failed:", data);
 });
 
 eventSource.onerror = (error) => {
-    console.error('Stream error:', error);
+  console.error("Stream error:", error);
 };
 ```
 
@@ -187,17 +189,17 @@ results = QueryExecutor.apply_filter(data, query_filter)
 
 ### Filter Operators
 
-| Operator | Example | Description |
-|----------|---------|-------------|
-| `eq` | `eq("status", "active")` | Equals |
-| `ne` | `ne("status", "deleted")` | Not equals |
-| `gt` | `gt("score", 100)` | Greater than |
-| `gte` | `gte("score", 100)` | Greater than or equal |
-| `lt` | `lt("score", 100)` | Less than |
-| `lte` | `lte("score", 100)` | Less than or equal |
-| `contains` | `contains("text", "api")` | Contains string |
-| `in` | `in_list("status", ["active", "pending"])` | In list |
-| `regex` | `regex("email", ".*@example.com")` | Regex match |
+| Operator   | Example                                    | Description           |
+| ---------- | ------------------------------------------ | --------------------- |
+| `eq`       | `eq("status", "active")`                   | Equals                |
+| `ne`       | `ne("status", "deleted")`                  | Not equals            |
+| `gt`       | `gt("score", 100)`                         | Greater than          |
+| `gte`      | `gte("score", 100)`                        | Greater than or equal |
+| `lt`       | `lt("score", 100)`                         | Less than             |
+| `lte`      | `lte("score", 100)`                        | Less than or equal    |
+| `contains` | `contains("text", "api")`                  | Contains string       |
+| `in`       | `in_list("status", ["active", "pending"])` | In list               |
+| `regex`    | `regex("email", ".*@example.com")`         | Regex match           |
 
 ### API Query Syntax
 
@@ -308,7 +310,7 @@ status = webhook_manager.get_delivery_status(webhook_id)
 
 if status['failed'] > 0:
     print(f"Failed deliveries: {status['failed']}")
-    
+
 # Retry failed deliveries
 for delivery in webhook_manager.deliveries:
     if delivery.status_code >= 500:

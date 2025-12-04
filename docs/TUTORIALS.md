@@ -35,6 +35,7 @@ python quick_test.py
 ```
 
 Expected output:
+
 ```
 Starting Agent AI Framework test...
 ✓ LLM connection successful
@@ -108,27 +109,27 @@ def main():
         api_key="sk-your-api-key",
         model="gpt-4"
     )
-    
+
     # Create planner and executor
     planner = Planner(llm=llm)
     executor = PlanExecutor(llm=llm)
-    
+
     # Define goal
     goal = "Create a Python web scraper for extracting product prices"
-    
+
     # Create plan
     plan = planner.create_plan(goal)
-    
+
     print(f"Goal: {plan.goal}")
     print(f"Number of tasks: {len(plan.tasks)}")
     print("\nTasks:")
     for i, task in enumerate(plan.tasks, 1):
         print(f"{i}. {task.description}")
-    
+
     # Execute plan
     print("\nExecuting plan...")
     results = executor.execute(plan)
-    
+
     # Display results
     for task_id, result in results.items():
         print(f"\nTask {task_id}:")
@@ -146,7 +147,7 @@ if __name__ == "__main__":
 ```python
 # Define a complex goal
 goal = """
-Analyze sales data, create visualizations, 
+Analyze sales data, create visualizations,
 and generate a comprehensive report
 """
 
@@ -220,10 +221,10 @@ from src.agent.executor import PlanExecutor
 class APIExecutor(PlanExecutor):
     async def execute_api_task(self, task):
         """Execute tasks that call external APIs"""
-        
+
         url = task.data.get('url')
         method = task.data.get('method', 'GET')
-        
+
         async with httpx.AsyncClient() as client:
             response = await client.request(method, url)
             return response.json()
@@ -253,10 +254,10 @@ class DBExecutor(PlanExecutor):
     def __init__(self, llm, db_engine):
         super().__init__(llm)
         self.db_engine = db_engine
-    
+
     def execute_db_task(self, task):
         """Execute database queries"""
-        
+
         with Session(self.db_engine) as session:
             # Execute task with database context
             query = task.data.get('query')
@@ -282,7 +283,7 @@ from pathlib import Path
 
 def process_files_task():
     """Process files with agent assistance"""
-    
+
     # Define goal
     goal = """
     Process all PDF files in data/input:
@@ -291,17 +292,17 @@ def process_files_task():
     3. Generate summaries
     4. Save to data/output
     """
-    
+
     # Create plan
     plan = planner.create_plan(goal)
-    
+
     # Execute with file context
     input_dir = Path("data/input")
     output_dir = Path("data/output")
     output_dir.mkdir(parents=True, exist_ok=True)
-    
+
     results = executor.execute(plan)
-    
+
     return results
 
 # Run file processing
@@ -343,27 +344,27 @@ app = Flask(__name__)
 @app.route('/webhook', methods=['POST'])
 def receive_webhook():
     """Receive webhook events from Agent AI"""
-    
+
     # Verify secret
     secret = "your-webhook-secret"
     signature = request.headers.get('X-Secret')
-    
+
     if not signature:
         return {"error": "Missing signature"}, 401
-    
+
     # Process event
     event_data = request.json
     event_type = event_data['type']
-    
+
     print(f"Received event: {event_type}")
     print(f"Event data: {event_data['data']}")
-    
+
     # Handle different event types
     if event_type == 'plan.completed':
         handle_plan_completed(event_data['data'])
     elif event_type == 'task.failed':
         handle_task_failed(event_data['data'])
-    
+
     return {"status": "received"}, 200
 
 def handle_plan_completed(data):
@@ -583,6 +584,7 @@ kubectl describe hpa agent-ai-hpa -n agent-ai
 ### Issue: Agent not responding
 
 **Solution**: Check LLM connection and API key
+
 ```bash
 python quick_test.py
 ```
@@ -590,6 +592,7 @@ python quick_test.py
 ### Issue: Tasks timeout
 
 **Solution**: Increase timeout in executor
+
 ```python
 executor = PlanExecutor(llm=llm, timeout=600)  # 10 minutes
 ```
@@ -597,6 +600,7 @@ executor = PlanExecutor(llm=llm, timeout=600)  # 10 minutes
 ### Issue: Memory issues
 
 **Solution**: Enable caching and pagination
+
 ```python
 # Use cache for frequent queries
 # Use pagination for large datasets

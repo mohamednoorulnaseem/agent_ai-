@@ -46,6 +46,7 @@ kubectl apply -f ../k8s/
 ## Docker Compose Deployment
 
 ### Recommended For
+
 - Development environments
 - Small to medium deployments
 - Single or multi-node Docker hosts
@@ -54,31 +55,37 @@ kubectl apply -f ../k8s/
 ### Services Included
 
 1. **Agent AI Application** (Port 8000, 9090 metrics)
+
    - 3 replicas with health checks
    - Automatic restart
    - Resource limits: 1.0 CPU, 1GB RAM
 
 2. **PostgreSQL Database** (Port 5432)
+
    - Volume persistence
    - Automatic backups
    - Health monitoring
 
 3. **Redis Cache** (Port 6379)
+
    - Password-protected
    - AOF persistence
    - LRU memory policy
 
 4. **Prometheus** (Port 9091)
+
    - Metrics collection
    - 30-day retention
    - Auto-configured scraping
 
 5. **Grafana** (Port 3000)
+
    - Pre-configured dashboards
    - Prometheus integration
    - User management
 
 6. **Jaeger Tracing** (Port 16686)
+
    - Distributed request tracing
    - Service visualization
 
@@ -131,6 +138,7 @@ docker-compose -f docker-compose.prod.yml exec postgres \
 ## Kubernetes Deployment
 
 ### Recommended For
+
 - Production environments
 - Multi-cloud/hybrid deployments
 - Auto-scaling requirements
@@ -145,11 +153,13 @@ docker-compose -f docker-compose.prod.yml exec postgres \
 ### Deployment Steps
 
 1. **Create Namespace**
+
    ```bash
    kubectl create namespace agent-ai
    ```
 
 2. **Create Secrets**
+
    ```bash
    kubectl create secret generic agent-ai-secrets \
      --from-literal=llm_api_key=sk-your-key \
@@ -158,16 +168,19 @@ docker-compose -f docker-compose.prod.yml exec postgres \
    ```
 
 3. **Deploy ConfigMaps & Secrets**
+
    ```bash
    kubectl apply -f k8s/configmap.yaml
    ```
 
 4. **Deploy Services**
+
    ```bash
    kubectl apply -f k8s/service.yaml
    ```
 
 5. **Deploy Application**
+
    ```bash
    kubectl apply -f k8s/deployment.yaml
    ```

@@ -30,6 +30,7 @@ GitHub provides discussion templates automatically.
 **Purpose**: Share learning materials and educational content
 
 **Example Topics**:
+
 - "How to deploy Agent AI to Kubernetes"
 - "Advanced prompt engineering techniques"
 - "Webhook integration best practices"
@@ -42,6 +43,7 @@ GitHub provides discussion templates automatically.
 **Purpose**: Discuss integrations with other tools and services
 
 **Example Topics**:
+
 - "Integrating with OpenAI's new models"
 - "Slack webhook integration"
 - "Database connector for PostgreSQL"
@@ -54,6 +56,7 @@ GitHub provides discussion templates automatically.
 **Purpose**: Important updates from maintainers
 
 **Example Topics**:
+
 - "v1.0.0 Release - Full Feature Parity"
 - "Deprecation Notice: Old API Format"
 - "Cloud Migration - New Endpoints"
@@ -66,6 +69,7 @@ GitHub provides discussion templates automatically.
 **Purpose**: General questions and troubleshooting
 
 **Example Topics**:
+
 - "How do I set up the LLM provider?"
 - "Getting timeout errors with large plans"
 - "Webhook delivery failing intermittently"
@@ -78,6 +82,7 @@ GitHub provides discussion templates automatically.
 **Purpose**: Propose and discuss new features
 
 **Example Topics**:
+
 - "Feature request: Multi-language support"
 - "Idea: Distributed plan execution"
 - "Proposal: GraphQL API alongside REST"
@@ -90,6 +95,7 @@ GitHub provides discussion templates automatically.
 **Purpose**: Report and discuss bugs and issues
 
 **Example Topics**:
+
 - "Agent hangs with circular task dependencies"
 - "Cache not invalidating correctly"
 - "Docker Compose fails on M1 Mac"
@@ -125,23 +131,29 @@ Provide context and details:
 
 ```markdown
 ## Question
+
 How do I properly set up webhook authentication for production?
 
 ## Context
+
 I'm deploying Agent AI to a Kubernetes cluster with TLS/SSL.
 
 ## What I've Tried
+
 - Followed the webhook documentation
 - Set up X-Secret header verification
 - Tested with curl
 
 ## What's Not Working
+
 Webhooks are hitting my endpoint but failing HMAC validation.
 
 ## Relevant Code
+
 [Include code snippets if applicable]
 
 ## Environment
+
 - OS: Ubuntu 20.04
 - Python: 3.10
 - Agent AI: 1.0.0
@@ -252,6 +264,7 @@ Environment:
 ### Report Issues
 
 If you see:
+
 - Spam or abuse
 - Off-topic content
 - Harassment
@@ -265,29 +278,36 @@ Use the "Report" button or contact maintainers.
 
 ```markdown
 ## Description
+
 Brief description of the bug.
 
 ## Reproduction Steps
+
 1. Step 1
 2. Step 2
 3. Step 3
 
 ## Expected Behavior
+
 What should happen?
 
 ## Actual Behavior
+
 What actually happened?
 
 ## Error Messages
+
 Include full error traces.
 
 ## Environment
+
 - Agent AI Version:
 - Python Version:
 - OS:
 - Other Details:
 
 ## Workaround
+
 If you've found a workaround, share it here.
 ```
 
@@ -295,18 +315,23 @@ If you've found a workaround, share it here.
 
 ```markdown
 ## Problem
+
 Describe the problem this solves.
 
 ## Proposed Solution
+
 How should this feature work?
 
 ## Benefits
+
 Why is this important?
 
 ## Alternative Approaches
+
 Other ways to solve this?
 
 ## Implementation Notes
+
 Any technical considerations?
 ```
 
@@ -314,18 +339,23 @@ Any technical considerations?
 
 ```markdown
 ## Question
+
 What do you want to know?
 
 ## Context
+
 Why do you need this?
 
 ## What I've Tried
+
 What have you already attempted?
 
 ## Relevant Code
+
 Include relevant code snippets.
 
 ## Expected vs Actual
+
 What should happen vs what's happening?
 ```
 
@@ -334,6 +364,7 @@ What should happen vs what's happening?
 ### Our Community
 
 The Agent AI community includes:
+
 - Maintainers
 - Contributors
 - Users
@@ -385,7 +416,8 @@ Use GitHub's report feature or contact:
 
 **Title**: "How to handle long-running tasks with timeout?"
 
-**Content**: 
+**Content**:
+
 - Clear problem statement
 - Code example showing the issue
 - Environment details
@@ -399,6 +431,7 @@ Use GitHub's report feature or contact:
 **Title**: [Response to webhook authentication question]
 
 **Content**:
+
 - Direct answer
 - Code example
 - Link to documentation
@@ -412,6 +445,7 @@ Use GitHub's report feature or contact:
 **Title**: "Support for distributed plan execution across clusters"
 
 **Content**:
+
 - Use case explanation
 - Proposed architecture
 - Benefits discussion

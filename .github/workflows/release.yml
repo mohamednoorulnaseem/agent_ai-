@@ -75,10 +75,10 @@ jobs:
         run: |
           # Update setup.py
           sed -i 's/version="[^"]*"/version="'$VERSION'"/' setup.py
-          
+
           # Update __version__.py
           sed -i 's/__version__ = "[^"]*"/__version__ = "'$VERSION'"/' src/__version__.py
-          
+
           echo "✓ Version updated to $VERSION"
 
       - name: Commit version bump

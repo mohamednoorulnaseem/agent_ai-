@@ -32,102 +32,102 @@ spec:
         runAsUser: 1000
         fsGroup: 1000
       containers:
-      - name: agent-ai
-        image: agent-ai:latest
-        imagePullPolicy: Always
-        ports:
-        - name: http
-          containerPort: 8000
-          protocol: TCP
-        - name: metrics
-          containerPort: 9090
-          protocol: TCP
-        env:
-        - name: ENVIRONMENT
-          value: "production"
-        - name: LOG_LEVEL
-          value: "info"
-        - name: LLM_PROVIDER
-          valueFrom:
-            configMapKeyRef:
-              name: agent-ai-config
-              key: llm_provider
-        - name: LLM_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: agent-ai-secrets
-              key: llm_api_key
-        - name: REDIS_HOST
-          value: "redis-service"
-        - name: REDIS_PORT
-          value: "6379"
-        - name: DATABASE_URL
-          valueFrom:
-            secretKeyRef:
-              name: agent-ai-secrets
-              key: database_url
-        - name: WEBHOOK_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: agent-ai-secrets
-              key: webhook_secret
-        - name: CACHE_TTL
-          value: "3600"
-        - name: MAX_WORKERS
-          value: "4"
-        resources:
-          requests:
-            cpu: 500m
-            memory: 512Mi
-          limits:
-            cpu: 1000m
-            memory: 1Gi
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: http
-          initialDelaySeconds: 30
-          periodSeconds: 10
-          timeoutSeconds: 5
-          failureThreshold: 3
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: http
-          initialDelaySeconds: 10
-          periodSeconds: 5
-          timeoutSeconds: 3
-          failureThreshold: 2
-        volumeMounts:
-        - name: cache-volume
-          mountPath: /app/cache
-        - name: logs-volume
-          mountPath: /app/logs
-        securityContext:
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
-          capabilities:
-            drop:
-            - ALL
+        - name: agent-ai
+          image: agent-ai:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+            - name: metrics
+              containerPort: 9090
+              protocol: TCP
+          env:
+            - name: ENVIRONMENT
+              value: "production"
+            - name: LOG_LEVEL
+              value: "info"
+            - name: LLM_PROVIDER
+              valueFrom:
+                configMapKeyRef:
+                  name: agent-ai-config
+                  key: llm_provider
+            - name: LLM_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: agent-ai-secrets
+                  key: llm_api_key
+            - name: REDIS_HOST
+              value: "redis-service"
+            - name: REDIS_PORT
+              value: "6379"
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: agent-ai-secrets
+                  key: database_url
+            - name: WEBHOOK_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: agent-ai-secrets
+                  key: webhook_secret
+            - name: CACHE_TTL
+              value: "3600"
+            - name: MAX_WORKERS
+              value: "4"
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1000m
+              memory: 1Gi
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 2
+          volumeMounts:
+            - name: cache-volume
+              mountPath: /app/cache
+            - name: logs-volume
+              mountPath: /app/logs
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
       volumes:
-      - name: cache-volume
-        emptyDir:
-          sizeLimit: 500Mi
-      - name: logs-volume
-        emptyDir:
-          sizeLimit: 1Gi
+        - name: cache-volume
+          emptyDir:
+            sizeLimit: 500Mi
+        - name: logs-volume
+          emptyDir:
+            sizeLimit: 1Gi
       affinity:
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - agent-ai
-              topologyKey: kubernetes.io/hostname
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchExpressions:
+                    - key: app
+                      operator: In
+                      values:
+                        - agent-ai
+                topologyKey: kubernetes.io/hostname
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -141,12 +141,12 @@ metadata:
   name: agent-ai
   namespace: agent-ai
 rules:
-- apiGroups: [""]
-  resources: ["configmaps"]
-  verbs: ["get", "list", "watch"]
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get"]
+  - apiGroups: [""]
+    resources: ["configmaps"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
@@ -158,9 +158,9 @@ roleRef:
   kind: Role
   name: agent-ai
 subjects:
-- kind: ServiceAccount
-  name: agent-ai
-  namespace: agent-ai
+  - kind: ServiceAccount
+    name: agent-ai
+    namespace: agent-ai
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget

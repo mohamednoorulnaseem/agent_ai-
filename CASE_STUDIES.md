@@ -234,7 +234,7 @@ def run_bi_pipeline():
     7. Update dashboard
     8. Send alerts for anomalies
     """
-    
+
     plan = planner.create_plan(goal)
     return executor.execute(plan)
 
@@ -306,22 +306,22 @@ def run_qa_suite():
     7. Identify regressions
     8. Create test summary
     """
-    
+
     # Check cache for previous results
     cached = test_cache.get("qa_results_latest")
     if cached and is_cache_valid(cached):
         return cached
-    
+
     plan = planner.create_plan(goal)
     results = executor.execute(plan)
-    
+
     # Cache results
     test_cache.set("qa_results_latest", results)
     return results
 
 def analyze_results(results):
     """Analyze QA results with filtering"""
-    
+
     # Find failed tests
     filter_builder = QueryFilterBuilder()
     failed_tests = (
@@ -331,13 +331,13 @@ def analyze_results(results):
         .sort("created_at", "desc")
         .build()
     )
-    
+
     from src.query_engine import QueryExecutor
     critical_issues = QueryExecutor.apply_filter(
         results['all_tests'],
         failed_tests
     )
-    
+
     return critical_issues
 
 # Execute tests
@@ -373,13 +373,13 @@ print(f"Coverage: {results['coverage']}%")
 
 ## Implementation Timeline
 
-| Case Study | Duration | Team Size | Investment | ROI |
-|-----------|----------|-----------|-----------|-----|
-| Data Analysis | 4 weeks | 2 | $8K | 300% (3 months) |
-| API Sync | 6 weeks | 3 | $15K | 400% (6 weeks) |
-| Document Processing | 8 weeks | 4 | $20K | 250% (2 months) |
-| BI Dashboard | 5 weeks | 2 | $12K | 350% (1 month) |
-| QA Automation | 12 weeks | 3 | $18K | 600% (2 weeks) |
+| Case Study          | Duration | Team Size | Investment | ROI             |
+| ------------------- | -------- | --------- | ---------- | --------------- |
+| Data Analysis       | 4 weeks  | 2         | $8K        | 300% (3 months) |
+| API Sync            | 6 weeks  | 3         | $15K       | 400% (6 weeks)  |
+| Document Processing | 8 weeks  | 4         | $20K       | 250% (2 months) |
+| BI Dashboard        | 5 weeks  | 2         | $12K       | 350% (1 month)  |
+| QA Automation       | 12 weeks | 3         | $18K       | 600% (2 weeks)  |
 
 ---
 
@@ -398,21 +398,25 @@ print(f"Coverage: {results['coverage']}%")
 Follow these steps based on these case studies:
 
 ### Step 1: Define the Problem
+
 ```
 What's taking too long? What's error-prone? What needs scaling?
 ```
 
 ### Step 2: Break Down into Tasks
+
 ```
 How would you manually solve this? Can an AI help?
 ```
 
 ### Step 3: Build and Test
+
 ```
 Start small, iterate, measure results
 ```
 
 ### Step 4: Deploy and Monitor
+
 ```
 Track performance, optimize, scale
 ```

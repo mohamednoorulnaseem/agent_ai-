@@ -7,15 +7,19 @@ Current API reference is provided by the FastAPI app at runtime (Swagger UI).
 How to view full API docs locally
 
 1. Start the server:
+
 ```bash
 python -m src.api
 ```
+
 2. Open the interactive docs:
+
 ```
 http://localhost:8000/docs
 ```
 
 Planned contents for this file:
+
 - Complete list of endpoints and payloads
 - Examples (curl, Python requests)
 - Authentication & rate limiting

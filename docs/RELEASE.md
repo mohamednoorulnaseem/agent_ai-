@@ -9,6 +9,7 @@ The project uses automated release workflows to manage versioning, tagging, and 
 ## Version Scheme
 
 We follow [Semantic Versioning](https://semver.org/):
+
 - **MAJOR.MINOR.PATCH** (e.g., 0.2.0)
 - **MAJOR**: Breaking changes
 - **MINOR**: New features, backward compatible
@@ -38,21 +39,27 @@ Add a new section to `CHANGELOG.md` at the top with format:
 ## [X.Y.Z] - YYYY-MM-DD
 
 ### Added
+
 - New feature description
 
 ### Changed
+
 - Changed behavior description
 
 ### Fixed
+
 - Bug fix description
 
 ### Deprecated
+
 - Deprecated functionality
 
 ### Removed
+
 - Removed functionality
 
 ### Security
+
 - Security fixes
 ```
 
@@ -95,6 +102,7 @@ Go to GitHub Actions → Release workflow:
 3. Click "Run workflow"
 
 The workflow will:
+
 - ✓ Validate version format
 - ✓ Verify changelog entry
 - ✓ Create and tag commit
@@ -135,24 +143,29 @@ Brief description of major features or changes.
 ## 📋 Changes
 
 ### Added
+
 - Feature 1
 - Feature 2
 
 ### Fixed
+
 - Bug fix 1
 - Bug fix 2
 
 ### Changed
+
 - Behavior change 1
 
 ## 📦 Installation
 
 ### Via pip
+
 \`\`\`bash
 pip install --upgrade agent_ai
 \`\`\`
 
 ### Via Docker
+
 \`\`\`bash
 docker pull agent-ai:v0.2.0
 docker compose up
@@ -192,6 +205,7 @@ To publish Docker images:
 4. Run release workflow
 
 Images will be tagged as:
+
 - `username/agent-ai:vX.Y.Z` (specific version)
 - `username/agent-ai:latest` (latest stable)
 
@@ -208,6 +222,7 @@ description: brief description
 ```
 
 Examples:
+
 - `feat(api): add webhook support`
 - `fix(cli): resolve initialization error`
 - `docs: update deployment guide`
@@ -216,6 +231,7 @@ Examples:
 ## Continuous Deployment
 
 Releases are deployed:
+
 - **PyPI**: Package repository
 - **Docker Hub**: Container images
 - **GitHub Releases**: Release notes and artifacts
@@ -226,6 +242,7 @@ Releases are deployed:
 ### Release workflow fails
 
 Check:
+
 1. Version format is correct (X.Y.Z)
 2. CHANGELOG.md includes version entry
 3. Git repository is clean
@@ -234,6 +251,7 @@ Check:
 ### Version mismatch
 
 Ensure consistency across:
+
 - `setup.py`
 - `src/__version__.py`
 - `CHANGELOG.md`
@@ -246,6 +264,7 @@ Add or check `PYPI_API_TOKEN` secret in GitHub settings.
 ### Docker push fails
 
 Add or check secrets in GitHub settings:
+
 - `DOCKER_USERNAME`
 - `DOCKER_PASSWORD`
 

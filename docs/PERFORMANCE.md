@@ -5,6 +5,7 @@ This guide covers performance optimization strategies for the AI Agent Framework
 ## Overview
 
 Performance optimization focuses on:
+
 - **Response Time**: Reduce latency of API endpoints
 - **Memory Usage**: Minimize memory footprint
 - **CPU Efficiency**: Optimize CPU utilization
@@ -17,6 +18,7 @@ Performance optimization focuses on:
 The framework includes a multi-level caching system:
 
 #### Memory Cache
+
 ```python
 from src.caching import MemoryCache
 
@@ -35,6 +37,7 @@ def expensive_function(arg):
 ```
 
 #### Persistent Cache
+
 ```python
 from src.caching import PersistentCache
 
@@ -116,8 +119,8 @@ performance:
     persistent_dir: .cache
 
   profiling:
-    enabled: false  # Enable for production monitoring
-    memory_tracking: false  # Slower, but detailed
+    enabled: false # Enable for production monitoring
+    memory_tracking: false # Slower, but detailed
     export_interval_seconds: 3600
 
   optimization:
@@ -128,8 +131,8 @@ performance:
 
 llm:
   # Use smaller models for cost optimization
-  model: "llama2-7b"  # Faster than larger models
-  
+  model: "llama2-7b" # Faster than larger models
+
   # Cache LLM responses
   response_cache_ttl: 3600
 ```
@@ -223,11 +226,11 @@ AGENT_ENABLE_PROFILING=true python -m benchmarks.agent_benchmarks
 
 Expected performance metrics:
 
-| Operation | Uncached | Cached | Improvement |
-|-----------|----------|--------|-------------|
-| Plan generation | 5000ms | 50ms | 100x |
-| API response | 2000ms | 100ms | 20x |
-| Task execution | 3000ms | 500ms | 6x |
+| Operation       | Uncached | Cached | Improvement |
+| --------------- | -------- | ------ | ----------- |
+| Plan generation | 5000ms   | 50ms   | 100x        |
+| API response    | 2000ms   | 100ms  | 20x         |
+| Task execution  | 3000ms   | 500ms  | 6x          |
 
 ## Troubleshooting Performance
 
@@ -236,6 +239,7 @@ Expected performance metrics:
 **Symptoms**: Process memory growing continuously
 
 **Solutions**:
+
 1. Reduce cache size: `AGENT_CACHE_MAX_SIZE_MB=50`
 2. Disable persistent cache: `AGENT_PERSISTENT_CACHE=false`
 3. Enable memory tracking to identify leaks
@@ -246,6 +250,7 @@ Expected performance metrics:
 **Symptoms**: Endpoints returning slowly (>1000ms)
 
 **Solutions**:
+
 1. Enable caching for endpoints
 2. Batch LLM queries
 3. Use smaller LLM models
@@ -256,6 +261,7 @@ Expected performance metrics:
 **Symptoms**: Excessive API billing
 
 **Solutions**:
+
 1. Enable query deduplication
 2. Cache responses with longer TTL
 3. Use local models (Ollama) instead of API
@@ -299,13 +305,13 @@ class DetailedProfiler(PerformanceProfiler):
     def analyze_bottlenecks(self):
         """Identify performance bottlenecks."""
         stats = self.get_all_stats()
-        
+
         for op_name, stats in stats.items():
             avg_duration = stats['duration_ms']['avg']
-            
+
             if avg_duration > 1000:
                 print(f"⚠️  Slow: {op_name} ({avg_duration:.0f}ms)")
-            
+
             if avg_duration > 5000:
                 print(f"🔴 Very Slow: {op_name} ({avg_duration:.0f}ms)")
 ```
@@ -339,14 +345,14 @@ Export metrics to monitoring tools:
 # Export to Prometheus
 def export_prometheus(profiler):
     stats = profiler.get_all_stats()
-    
+
     for op_name, stat in stats.items():
         print(f"agent_duration_ms{{operation='{op_name}'}} {stat['duration_ms']['avg']}")
 
 # Export to InfluxDB
 def export_influxdb(profiler, client):
     stats = profiler.get_all_stats()
-    
+
     for op_name, stat in stats.items():
         client.write_points([{
             "measurement": "agent_performance",

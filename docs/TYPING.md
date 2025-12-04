@@ -5,6 +5,7 @@ This document describes the type hints strategy for the AI Agent Framework.
 ## Overview
 
 The project uses Python 3.9+ type hints to ensure:
+
 - Better IDE support and autocomplete
 - Earlier detection of type-related bugs
 - Clearer function and method contracts
@@ -14,16 +15,16 @@ The project uses Python 3.9+ type hints to ensure:
 
 ### Core Modules
 
-| Module       | Coverage | Status      |
-| ------------ | -------- | ----------- |
-| `src/auth.py`       | 100%     | ✅ Complete |
-| `src/cli.py`        | 90%      | ✅ Complete |
-| `src/config.py`     | 85%      | ✅ Complete |
-| `src/persistence.py`| 95%      | ✅ Complete |
-| `src/api.py`        | 80%      | 🔄 Partial  |
-| `src/agent/`        | 75%      | 🔄 Partial  |
-| `src/llm/`          | 70%      | 🔄 Partial  |
-| `src/repo/`         | 65%      | 🔄 Partial  |
+| Module               | Coverage | Status      |
+| -------------------- | -------- | ----------- |
+| `src/auth.py`        | 100%     | ✅ Complete |
+| `src/cli.py`         | 90%      | ✅ Complete |
+| `src/config.py`      | 85%      | ✅ Complete |
+| `src/persistence.py` | 95%      | ✅ Complete |
+| `src/api.py`         | 80%      | 🔄 Partial  |
+| `src/agent/`         | 75%      | 🔄 Partial  |
+| `src/llm/`           | 70%      | 🔄 Partial  |
+| `src/repo/`          | 65%      | 🔄 Partial  |
 
 ## Type Hints Conventions
 
@@ -56,7 +57,7 @@ class TaskManager:
     tasks: Dict[int, Task] = {}
     max_tasks: int = 50
     config: Optional[Config] = None
-    
+
     def __init__(self, name: str) -> None:
         self.name: str = name
         self.created_at: datetime = datetime.now()
@@ -100,10 +101,10 @@ T = TypeVar('T')
 class Cache(Generic[T]):
     def __init__(self) -> None:
         self.items: Dict[str, T] = {}
-    
+
     def get(self, key: str) -> Optional[T]:
         return self.items.get(key)
-    
+
     def set(self, key: str, value: T) -> None:
         self.items[key] = value
 ```
@@ -221,13 +222,11 @@ Add to `.vscode/settings.json`:
 
 ```json
 {
-    "python.linting.mypyEnabled": true,
-    "python.linting.mypyArgs": [
-        "--strict"
-    ],
-    "[python]": {
-        "editor.defaultFormatter": "ms-python.python"
-    }
+  "python.linting.mypyEnabled": true,
+  "python.linting.mypyArgs": ["--strict"],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.python"
+  }
 }
 ```
 

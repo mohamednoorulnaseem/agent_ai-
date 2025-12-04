@@ -5,6 +5,7 @@
 ### Core Module Imports
 
 #### Webhooks & Events
+
 ```python
 # Event type enumeration
 from src.webhooks import EventType
@@ -36,6 +37,7 @@ from src.webhooks import (
 ```
 
 **Usage Example**:
+
 ```python
 from src.webhooks import WebhookManager, EventType, WebhookEvent
 
@@ -66,6 +68,7 @@ for event in stream:
 ---
 
 #### Query Engine & Filtering
+
 ```python
 # Query filter builder
 from src.query_engine import QueryFilterBuilder
@@ -85,6 +88,7 @@ from src.query_engine import (
 ```
 
 **Operators Reference**:
+
 ```python
 from src.query_engine import QueryFilterBuilder
 
@@ -116,6 +120,7 @@ builder = QueryFilterBuilder()
 ```
 
 **Usage Example**:
+
 ```python
 from src.query_engine import QueryFilterBuilder, QueryExecutor, SearchEngine
 
@@ -141,6 +146,7 @@ search_results = search_engine.search(data, "REST API")
 ---
 
 #### Caching System
+
 ```python
 # In-memory cache
 from src.caching import MemoryCache
@@ -164,6 +170,7 @@ from src.caching import (
 ```
 
 **Usage Example**:
+
 ```python
 from src.caching import MemoryCache, CacheDecorator
 
@@ -191,6 +198,7 @@ print(f"Hit Rate: {stats['hit_rate']:.2%}")
 ---
 
 #### Performance Profiling
+
 ```python
 # Performance profiler
 from src.performance import PerformanceProfiler
@@ -214,6 +222,7 @@ from src.performance import (
 ```
 
 **Usage Example**:
+
 ```python
 from src.performance import PerformanceProfiler, profile_operation
 
@@ -242,6 +251,7 @@ optimized_query = optimizer.optimize_query(original_query)
 ---
 
 #### Version Management
+
 ```python
 # Version info
 from src import __version__
@@ -255,6 +265,7 @@ print(__version__)  # Returns current version
 ## Framework Imports
 
 ### Base Classes & Interfaces
+
 ```python
 # Core agent framework (from existing project)
 from agent.executor import Executor
@@ -272,6 +283,7 @@ from repo.patcher import Patcher
 ```
 
 ### API Module
+
 ```python
 # FastAPI application
 from api import create_app, get_app
@@ -288,6 +300,7 @@ from config import load_config, get_settings
 ## Infrastructure Files Organization
 
 ### Kubernetes Manifests
+
 ```
 k8s/
 ├── deployment.yaml    # Agent AI deployment with HPA
@@ -296,6 +309,7 @@ k8s/
 ```
 
 **Deployment via Kubernetes**:
+
 ```bash
 # Create namespace
 kubectl create namespace agent-ai
@@ -314,6 +328,7 @@ kubectl scale deployment agent-ai --replicas=5 -n agent-ai
 ```
 
 ### Terraform Configuration
+
 ```
 terraform/
 ├── main.tf         # AWS VPC, EKS, RDS, ElastiCache, ECR
@@ -322,6 +337,7 @@ terraform/
 ```
 
 **Deployment via Terraform**:
+
 ```bash
 cd terraform
 
@@ -339,6 +355,7 @@ terraform destroy
 ```
 
 ### Docker Compose Stack
+
 ```yaml
 # docker-compose.prod.yml contains:
 # - agent-ai (main application)
@@ -351,6 +368,7 @@ terraform destroy
 ```
 
 **Deployment via Docker Compose**:
+
 ```bash
 docker-compose -f docker-compose.prod.yml up -d
 docker-compose -f docker-compose.prod.yml down
@@ -362,6 +380,7 @@ docker-compose -f docker-compose.prod.yml logs -f
 ## Documentation Files Organization
 
 ### Primary Documentation
+
 ```
 docs/
 ├── RELEASE.md                    # Release workflow automation
@@ -373,6 +392,7 @@ docs/
 ```
 
 ### Project Level Documentation
+
 ```
 ├── MASTER_SUMMARY.md             # Executive summary
 ├── PHASE_7_COMPLETION_REPORT.md  # Detailed metrics and status
@@ -383,6 +403,7 @@ docs/
 ```
 
 ### Getting Started
+
 ```
 ├── README.md                     # Project overview
 ├── QUICK_START_GUIDE.md          # 5-minute setup
@@ -394,6 +415,7 @@ docs/
 ## Common Import Patterns
 
 ### Pattern 1: Complete Feature Import
+
 ```python
 # Webhook with all components
 from src.webhooks import (
@@ -406,6 +428,7 @@ from src.webhooks import (
 ```
 
 ### Pattern 2: Selective Imports
+
 ```python
 # Just what you need
 from src.query_engine import QueryFilterBuilder
@@ -414,6 +437,7 @@ from src.performance import profile_operation
 ```
 
 ### Pattern 3: Decorator-Based
+
 ```python
 # Using decorators
 from src.caching import CacheDecorator
@@ -426,6 +450,7 @@ def my_function():
 ```
 
 ### Pattern 4: Manager Objects
+
 ```python
 # Using manager pattern
 from src.webhooks import WebhookManager
@@ -442,6 +467,7 @@ search = SearchEngine()
 ## Type Hints & Dataclasses
 
 ### Webhook Types
+
 ```python
 from src.webhooks import WebhookEvent, WebhookDelivery
 
@@ -462,6 +488,7 @@ delivery.next_retry
 ```
 
 ### Query Filter Types
+
 ```python
 from src.query_engine import QueryFilter
 
@@ -475,6 +502,7 @@ query_filter.offset       # Result offset
 ```
 
 ### Performance Types
+
 ```python
 from src.performance import PerformanceStatistics
 
@@ -517,19 +545,20 @@ Framework Integration:
 
 ## Quick Reference Table
 
-| Module | Purpose | Main Classes | Learn From |
-|--------|---------|--------------|-----------|
-| `webhooks.py` | Event-driven | `WebhookManager`, `EventType`, `EventStream` | [docs/ADVANCED_API.md](../docs/ADVANCED_API.md) |
+| Module            | Purpose            | Main Classes                                          | Learn From                                      |
+| ----------------- | ------------------ | ----------------------------------------------------- | ----------------------------------------------- |
+| `webhooks.py`     | Event-driven       | `WebhookManager`, `EventType`, `EventStream`          | [docs/ADVANCED_API.md](../docs/ADVANCED_API.md) |
 | `query_engine.py` | Filtering & Search | `QueryFilterBuilder`, `QueryExecutor`, `SearchEngine` | [docs/ADVANCED_API.md](../docs/ADVANCED_API.md) |
-| `caching.py` | Performance | `MemoryCache`, `PersistentCache`, `CacheDecorator` | [docs/PERFORMANCE.md](../docs/PERFORMANCE.md) |
-| `performance.py` | Profiling | `PerformanceProfiler`, `profile_operation` | [docs/PERFORMANCE.md](../docs/PERFORMANCE.md) |
-| `__version__.py` | Versioning | `__version__` | [docs/RELEASE.md](../docs/RELEASE.md) |
+| `caching.py`      | Performance        | `MemoryCache`, `PersistentCache`, `CacheDecorator`    | [docs/PERFORMANCE.md](../docs/PERFORMANCE.md)   |
+| `performance.py`  | Profiling          | `PerformanceProfiler`, `profile_operation`            | [docs/PERFORMANCE.md](../docs/PERFORMANCE.md)   |
+| `__version__.py`  | Versioning         | `__version__`                                         | [docs/RELEASE.md](../docs/RELEASE.md)           |
 
 ---
 
 ## Integration Examples
 
 ### Example 1: Complete Pipeline
+
 ```python
 from src.webhooks import WebhookManager, EventType
 from src.query_engine import QueryFilterBuilder, QueryExecutor
@@ -547,16 +576,16 @@ profiler = PerformanceProfiler()
 def process_with_features(data):
     # Build query
     query = QueryFilterBuilder().eq("status", "active").build()
-    
+
     # Execute query
     results = QueryExecutor.apply_filter(data, query)
-    
+
     # Trigger event
     import asyncio
     asyncio.run(webhook_manager.trigger_event(
         WebhookEvent(EventType.PLAN_COMPLETED, {"count": len(results)})
     ))
-    
+
     return results
 
 # Use it
@@ -565,6 +594,7 @@ print(profiler.get_stats("full_pipeline"))
 ```
 
 ### Example 2: API Endpoint
+
 ```python
 from fastapi import FastAPI
 from src.webhooks import WebhookManager
@@ -576,7 +606,7 @@ webhook_manager = WebhookManager()
 @app.post("/api/events")
 async def register_webhook(url: str, events: list[str]):
     from src.webhooks import EventType
-    
+
     event_types = [EventType[e] for e in events]
     webhook = webhook_manager.register_webhook(url, event_types)
     return {"webhook_id": webhook.id}
@@ -602,6 +632,7 @@ async def search(status: str = None, limit: int = 10):
 ---
 
 **For more information:**
+
 - [PHASE_7_INDEX.md](PHASE_7_INDEX.md) - Complete index
 - [docs/TUTORIALS.md](docs/TUTORIALS.md) - Learning path
 - [docs/ADVANCED_API.md](docs/ADVANCED_API.md) - API examples
