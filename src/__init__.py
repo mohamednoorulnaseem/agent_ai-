@@ -65,6 +65,15 @@ from .performance import (
     QueryOptimizer,
     PerformanceStatistics,
 )
+from .advanced_pro import (
+    CircuitBreaker,
+    RateLimiter,
+    RequestSignature,
+    AdaptiveCaching,
+    DistributedTracing,
+    AdvancedAnalytics,
+    AdvancedMetrics,
+)
 
 # Prefer package version from src/__version__.py when available
 try:
@@ -101,5 +110,13 @@ __all__ = [
     "profile_operation",
     "QueryOptimizer",
     "PerformanceStatistics",
+    # Advanced Pro Features
+    "CircuitBreaker",
+    "RateLimiter",
+    "RequestSignature",
+    "AdaptiveCaching",
+    "DistributedTracing",
+    "AdvancedAnalytics",
+    "AdvancedMetrics",
     "__version__",
 ]
