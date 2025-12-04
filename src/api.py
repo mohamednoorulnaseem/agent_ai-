@@ -28,6 +28,8 @@ from websocket_support import manager as ws_manager, EventBroadcaster
 from auth import TokenManager, APIKeyManager, get_current_user, get_current_admin, verify_credentials, User, DEMO_CREDENTIALS
 from templates import TemplateLibrary
 from analytics import analytics, metrics_collector
+from api_keys_routes import router as api_keys_router
+from api_key_middleware import APIKeyAuthMiddleware
 
 
 # Configure logging
@@ -142,6 +144,12 @@ app = FastAPI(
     description="REST API for the AI Agent framework",
     version="0.1.0"
 )
+
+# Add API key authentication middleware
+app.add_middleware(APIKeyAuthMiddleware)
+
+# Include API key management routes
+app.include_router(api_keys_router)
 
 # Global state
 db_manager = DatabaseManager()

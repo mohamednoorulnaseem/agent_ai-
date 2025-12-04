@@ -73,6 +73,23 @@ from .advanced_pro import (
     AdvancedMetrics,
 )
 
+# API Key Management
+from .api_keys import (
+    APIKeyManager,
+    KeyStatus,
+    APIKeyInfo,
+    get_api_key_manager,
+)
+from .api_keys_routes import router as api_keys_router
+from .api_key_middleware import (
+    APIKeyAuthMiddleware,
+    get_api_key_from_request,
+    get_api_key_owner,
+    get_api_key_scopes,
+    require_api_key_scope,
+    require_api_authentication,
+)
+
 # Prefer package version from src/__version__.py when available
 try:
     from .__version__ import __version__ as _pkg_version
@@ -114,5 +131,17 @@ __all__ = [
     "DistributedTracing",
     "AdvancedAnalytics",
     "AdvancedMetrics",
+    # API Key Management
+    "APIKeyManager",
+    "KeyStatus",
+    "APIKeyInfo",
+    "get_api_key_manager",
+    "api_keys_router",
+    "APIKeyAuthMiddleware",
+    "get_api_key_from_request",
+    "get_api_key_owner",
+    "get_api_key_scopes",
+    "require_api_key_scope",
+    "require_api_authentication",
     "__version__",
 ]
