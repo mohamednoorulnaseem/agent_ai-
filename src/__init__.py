@@ -57,13 +57,11 @@ from .caching import (
     MemoryCache,
     PersistentCache,
     CacheDecorator,
-    CacheStatistics,
 )
 from .performance import (
     PerformanceProfiler,
     profile_operation,
     QueryOptimizer,
-    PerformanceStatistics,
 )
 from .advanced_pro import (
     CircuitBreaker,
@@ -105,11 +103,9 @@ __all__ = [
     "MemoryCache",
     "PersistentCache",
     "CacheDecorator",
-    "CacheStatistics",
     "PerformanceProfiler",
     "profile_operation",
     "QueryOptimizer",
-    "PerformanceStatistics",
     # Advanced Pro Features
     "CircuitBreaker",
     "RateLimiter",
